@@ -1,0 +1,620 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.text-center {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #1e3a5f;
+}
+
+.create-post {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.profile-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.create-post button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.create-post button:hover {
+    background: #0056b3;
+}
+
+.posts h3 {
+    margin-bottom: 15px;
+}
+
+.post {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-header div {
+    display: flex;
+    flex-direction: column;
+}
+
+.post p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.post-actions span:hover {
+    text-decoration: underline;
+}
+
+.comments-section {
+    margin-top: 10px;
+}
+
+.comment-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f1f1;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.comment-input textarea {
+    flex-grow: 1;
+    border: none;
+    padding: 8px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    resize: none;
+    overflow: hidden;
+    min-height: 40px;
+    max-height: 100px;
+}
+
+.comment-input textarea:focus {
+    background: #fff;
+}
+
+.comment-submit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment-submit::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23007bff"><path d="M2 21l21-9-21-9v7l15 2-15 2z"/></svg>')
+        no-repeat center;
+    background-size: contain;
+}
+
+.comments-list {
+    margin-top: 10px;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    margin-bottom: 5px;
+}
+
+.comment .profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.comment-content strong {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.comment-content p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.comment-content small {
+    font-size: 12px;
+    color: #777;
+}
+
+.comment-input textarea:focus,
+.comment-input textarea:valid {
+    height: auto;
+    overflow-y: hidden;
+}
+
+.header-home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: #1e3a5f;
+    color: white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-home .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-home .logo img {
+    height: 45px;
+    margin-right: 10px;
+}
+
+.header-home .logo h1 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-home .search-bar {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.search-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.search-wrapper input {
+    width: 250px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background: #fff
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>')
+        no-repeat right 12px center;
+    background-size: 20px;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1100;
+    display: none;
+}
+
+.search-suggestions.active {
+    display: block;
+}
+
+.search-suggestions div {
+    padding: 8px;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-suggestions div:last-child {
+    border-bottom: none;
+}
+
+.search-suggestions div:hover {
+    background: #f1f1f1;
+}
+
+.user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+.profile-menu:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.arrow-down {
+    font-size: 12px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 150px;
+}
+
+.user-profile .dropdown-content a,
+.user-profile .dropdown-content button {
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+    display: block;
+}
+
+.user-profile .dropdown-content a:hover,
+.user-profile .dropdown-content button:hover {
+    background: #f0f2f5;
+}
+.like-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #e91e62;
+    background-color: #e91e6200;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.like-btn:hover {
+    background-color: #c2185b;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px; /* forma più rotonda */
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.close-modal {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.create-post-trigger {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    cursor: text;
+    margin-bottom: 20px;
+}
+
+.create-post-trigger span {
+    margin-left: 10px;
+    background: #f1f1f1;
+    padding: 10px;
+    border-radius: 20px;
+    width: 100%;
+    color: #999;
+}
+
+.create-post-trigger span:hover {
+    background: #e1e1e1;
+    color: #999;
+}
+
+.modal-content textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.header-weather-btn {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header-weather-btn::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url("/images/icons8-tempo-atmosferico.svg") no-repeat center
+        center;
+    background-size: contain;
+    transition: transform 0.2s ease;
+}
+
+.header-weather-btn:hover {
+    transform: scale(1.1);
+}
+
+#weatherModal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#weatherModal .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+}
+
+#weather-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.weather-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.weather-search input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+.weather-search button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.weather-search button:hover {
+    background: #0056b3;
+}
+
+.weather-result {
+    min-height: 80px;
+}
+
+.header-spotify-btn {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header-spotify-btn::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url("/images/icons8-spotify.svg") no-repeat center center;
+    background-size: contain;
+    transition: transform 0.2s ease;
+}
+
+.header-spotify-btn:hover::before {
+    transform: scale(1.1);
+}
+
+.spotify-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.spotify-search input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+.spotify-search button {
+    background: #1db954;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.spotify-search button:hover {
+    background: #179043;
+}
+
+.spotify-results {
+    min-height: 60px;
+}
+
+@media (max-width: 768px) {
+    .header-home .logo h1 {
+        display: none;
+    }
+
+    .header-home .search-bar input {
+        width: 150px;
+        padding: 8px 35px 8px 8px;
+        font-size: 13px;
+    }
+
+    .header-home .profile-menu .username,
+    .header-home .profile-menu .arrow-down {
+        display: none;
+    }
+
+    .header-home {
+        padding: 10px 15px;
+    }
+
+    .header-home .logo img {
+        height: 35px;
+    }
+}
