@@ -39,43 +39,45 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("search-users");
     const suggestionsBox = document.getElementById("search-suggestions");
 
-    searchInput.addEventListener("input", function () {
-        const query = searchInput.value.trim();
+    if (searchInput && suggestionsBox) {
+        searchInput.addEventListener("input", function () {
+            const query = searchInput.value.trim();
 
-        if (query.length === 0) {
-            suggestionsBox.innerHTML = "";
-            suggestionsBox.classList.remove("active");
-            return;
-        }
-
-        fetch(`/search-users?query=${encodeURIComponent(query)}`)
-            .then((response) => response.json())
-            .then((users) => {
+            if (query.length === 0) {
                 suggestionsBox.innerHTML = "";
-                if (users.length > 0) {
-                    users.forEach((user) => {
-                        const div = document.createElement("div");
-                        div.textContent = `${user.name} (@${user.username})`;
-                        div.addEventListener("click", function () {
-                            window.location.href = `/profile/${user.id}`;
-                        });
-                        suggestionsBox.appendChild(div);
-                    });
-                    suggestionsBox.classList.add("active");
-                } else {
-                    suggestionsBox.classList.remove("active");
-                }
-            });
-    });
+                suggestionsBox.classList.remove("active");
+                return;
+            }
 
-    document.addEventListener("click", function (e) {
-        if (
-            !searchInput.contains(e.target) &&
-            !suggestionsBox.contains(e.target)
-        ) {
-            suggestionsBox.classList.remove("active");
-        }
-    });
+            fetch(`/search-users?query=${encodeURIComponent(query)}`)
+                .then((response) => response.json())
+                .then((users) => {
+                    suggestionsBox.innerHTML = "";
+                    if (users.length > 0) {
+                        users.forEach((user) => {
+                            const div = document.createElement("div");
+                            div.textContent = `${user.name} (@${user.username})`;
+                            div.addEventListener("click", function () {
+                                window.location.href = `/profile/${user.id}`;
+                            });
+                            suggestionsBox.appendChild(div);
+                        });
+                        suggestionsBox.classList.add("active");
+                    } else {
+                        suggestionsBox.classList.remove("active");
+                    }
+                });
+        });
+
+        document.addEventListener("click", function (e) {
+            if (
+                !searchInput.contains(e.target) &&
+                !suggestionsBox.contains(e.target)
+            ) {
+                suggestionsBox.classList.remove("active");
+            }
+        });
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -111,95 +113,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-async function getSpotifyToken() {
-    const response = await fetch("/spotify/token");
-    const data = await response.json();
-    return data.access_token;
-}
-
-async function searchSpotifyTrack(query) {
-    const token = await getSpotifyToken();
-    const url = `/spotify/search?token=${encodeURIComponent(
-        token
-    )}&q=${encodeURIComponent(query)}`;
-
-    const resp = await fetch(url);
-    const data = await resp.json();
-    return data;
-}
-
-document
-    .getElementById("spotify-search-btn")
-    ?.addEventListener("click", async () => {
-        const query = document.getElementById("spotify-query")?.value?.trim();
-        if (!query) {
-            alert("Inserisci un titolo o un artista.");
-            return;
-        }
-        const data = await searchSpotifyTrack(query);
-        showSpotifyTracks(data);
-    });
-
-function showSpotifyTracks(data) {
-    const container = document.getElementById("spotify-results");
-    if (!data.tracks || !data.tracks.items?.length) {
-        container.innerHTML = "<p>Nessun risultato trovato</p>";
-        return;
-    }
-    let html = "<ul>";
-    data.tracks.items.forEach((item) => {
-        const trackName = item.name;
-        const artistName = item.artists[0].name;
-        const albumCover = item.album.images[2]?.url;
-        html += `
-        <li style="margin-bottom:10px;">
-          <img src="${albumCover}" alt="copertina" style="vertical-align:middle;width:40px;height:40px;margin-right:5px;">
-          <strong>${trackName}</strong> - ${artistName}
-        </li>
-      `;
-    });
-    html += "</ul>";
-    container.innerHTML = html;
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const weatherSearchBtn = document.getElementById("weather-search-btn");
     const weatherCityInput = document.getElementById("weather-city");
     const weatherResultDiv = document.getElementById("weather-result");
 
     if (weatherSearchBtn && weatherCityInput && weatherResultDiv) {
-        weatherSearchBtn.addEventListener("click", function () {
-            searchWeather();
+        weatherSearchBtn.addEventListener("click", () => {
+            WeatherSearch();
         });
 
         weatherCityInput.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
-                searchWeather();
+                WeatherSearch();
             }
         });
 
-        function searchWeather() {
+        function WeatherSearch() {
             const city = weatherCityInput.value.trim();
             if (!city) {
                 alert("Inserisci una località!");
                 return;
             }
-            fetchWeatherData(city);
-        }
 
-        function fetchWeatherData(cityName) {
-            const apiKey = "0553507f730a5ba997afa762f048d84c";
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-                cityName
-            )}&appid=${apiKey}&units=metric&lang=it`;
-
-            console.log("URL generato:", url);
-
-            fetch(url)
+            fetch(`/weather?city=${encodeURIComponent(city)}`)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log("Risposta meteo:", data);
                     if (data.cod === 200) {
                         showWeatherData(data);
                     } else {
@@ -260,25 +200,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Inserisci un brano o un artista!");
                 return;
             }
-            const data = await searchSpotifyTrack(query);
+            const data = await SpotifySearch(query);
             showSpotifyTracks(data);
         });
     }
 
-    async function searchSpotifyTrack(query) {
-        const tokenResp = await fetch("/spotify/token");
-        const tokenData = await tokenResp.json();
-        const token = tokenData.access_token;
-
-        const url = `/spotify/search?token=${encodeURIComponent(
-            token
-        )}&q=${encodeURIComponent(query)}`;
+    async function SpotifySearch(query) {
+        const url = `/spotify/search?q=${encodeURIComponent(query)}`;
         const resp = await fetch(url);
         return await resp.json();
     }
 
     function showSpotifyTracks(data) {
-        if (!data.tracks || !data.tracks.items.length) {
+        if (!data.tracks || !data.tracks.items?.length) {
             spotifyResults.innerHTML = "<p>Nessun risultato trovato</p>";
             return;
         }
@@ -286,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data.tracks.items.forEach((item) => {
             const trackName = item.name;
             const artistName = item.artists[0].name;
-            const albumCover = item.album.images[2]?.url;
+            const albumCover = item.album.images[2]?.url || "";
             html += `
                 <li style="margin:10px 0;">
                     <img src="${albumCover}" alt="cover" style="vertical-align:middle;width:40px;height:40px;margin-right:10px;">

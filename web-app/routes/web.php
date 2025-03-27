@@ -8,6 +8,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SpotifyController;
+use App\Http\Controllers\WeatherController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -25,18 +27,19 @@ Route::get('/register', function () {
 
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
-Route::get('/spotify/token', [SpotifyController::class, 'getToken'])->name('spotify.token');
-Route::get('/spotify/search', [SpotifyController::class, 'searchTrack'])->name('spotify.search');
-
 Route::middleware('auth')->group(function () {
     
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/search-users', [UserController::class, 'search'])->name('search.users')->middleware('auth');
+    Route::get('/search-users', [UserController::class, 'search'])->name('search.users');
     Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/weather', [WeatherController::class, 'getWeather'])->name('weather.get');
+    Route::get('/spotify/search', [SpotifyController::class, 'searchTrack'])->name('spotify.search');
+    
   
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
 
