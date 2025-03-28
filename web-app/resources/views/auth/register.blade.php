@@ -11,7 +11,6 @@
         <div class="auth-box">
             <h2>Registrati</h2>
 
-            <!-- Errori lato server (Laravel) -->
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -78,7 +77,7 @@
 
             function checkField(input) {
                 const val = input.value.trim();
-                const errP = input.parentElement.querySelector('.error-message');
+                const err = input.parentElement.querySelector('.error-message');
                 let errorMsg = "";
 
                 if (!val) {
@@ -97,12 +96,12 @@
                 }
 
                 if (errorMsg) {
-                    errP.textContent = errorMsg;
-                    errP.style.display = "block";
+                    err.textContent = errorMsg;
+                    err.style.display = "block";
                     return true;
                 } else {
-                    errP.textContent = "";
-                    errP.style.display = "none";
+                    err.textContent = "";
+                    err.style.display = "none";
                     return false;
                 }
             }
